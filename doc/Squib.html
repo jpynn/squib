@@ -80,7 +80,7 @@
   
     <dt class="r1 last">Defined in:</dt>
     <dd class="r1 last">lib/squib/deck.rb<span class="defines">,<br />
-  lib/squib.rb,<br /> lib/squib/conf.rb,<br /> lib/squib/card.rb,<br /> lib/squib/version.rb,<br /> lib/squib/progress.rb,<br /> lib/squib/api/save.rb,<br /> lib/squib/api/data.rb,<br /> lib/squib/args/box.rb,<br /> lib/squib/api/text.rb,<br /> lib/squib/api/units.rb,<br /> lib/squib/constants.rb,<br /> lib/squib/args/draw.rb,<br /> lib/squib/api/image.rb,<br /> lib/squib/args/paint.rb,<br /> lib/squib/api/shapes.rb,<br /> lib/squib/args/sheet.rb,<br /> lib/squib/args/coords.rb,<br /> lib/squib/args/import.rb,<br /> lib/squib/commands/new.rb,<br /> lib/squib/api/settings.rb,<br /> lib/squib/layout_parser.rb,<br /> lib/squib/graphics/hand.rb,<br /> lib/squib/graphics/text.rb,<br /> lib/squib/args/scale_box.rb,<br /> lib/squib/graphics/image.rb,<br /> lib/squib/args/paragraph.rb,<br /> lib/squib/api/text_embed.rb,<br /> lib/squib/args/transform.rb,<br /> lib/squib/args/embed_key.rb,<br /> lib/squib/api/background.rb,<br /> lib/squib/args/card_range.rb,<br /> lib/squib/graphics/shapes.rb,<br /> lib/squib/args/save_batch.rb,<br /> lib/squib/args/arg_loader.rb,<br /> lib/squib/args/input_file.rb,<br /> lib/squib/args/svg_special.rb,<br /> lib/squib/args/typographer.rb,<br /> lib/squib/args/embed_adjust.rb,<br /> lib/squib/graphics/showcase.rb,<br /> lib/squib/args/hand_special.rb,<br /> lib/squib/graphics/save_doc.rb,<br /> lib/squib/args/dir_validator.rb,<br /> lib/squib/graphics/background.rb,<br /> lib/squib/args/color_validator.rb,<br /> lib/squib/graphics/save_images.rb,<br /> lib/squib/args/unit_conversion.rb,<br /> lib/squib/args/showcase_special.rb,<br /> lib/squib/graphics/gradient_regex.rb,<br /> lib/squib/graphics/cairo_context_wrapper.rb</span>
+  lib/squib.rb,<br /> lib/squib/card.rb,<br /> lib/squib/conf.rb,<br /> lib/squib/version.rb,<br /> lib/squib/api/text.rb,<br /> lib/squib/progress.rb,<br /> lib/squib/api/save.rb,<br /> lib/squib/api/data.rb,<br /> lib/squib/args/box.rb,<br /> lib/squib/api/image.rb,<br /> lib/squib/api/units.rb,<br /> lib/squib/constants.rb,<br /> lib/squib/args/draw.rb,<br /> lib/squib/args/sheet.rb,<br /> lib/squib/args/paint.rb,<br /> lib/squib/api/shapes.rb,<br /> lib/squib/args/import.rb,<br /> lib/squib/args/coords.rb,<br /> lib/squib/api/settings.rb,<br /> lib/squib/commands/new.rb,<br /> lib/squib/graphics/text.rb,<br /> lib/squib/graphics/hand.rb,<br /> lib/squib/layout_parser.rb,<br /> lib/squib/args/scale_box.rb,<br /> lib/squib/sample_helpers.rb,<br /> lib/squib/api/text_embed.rb,<br /> lib/squib/graphics/image.rb,<br /> lib/squib/args/transform.rb,<br /> lib/squib/args/embed_key.rb,<br /> lib/squib/args/paragraph.rb,<br /> lib/squib/api/background.rb,<br /> lib/squib/args/input_file.rb,<br /> lib/squib/graphics/shapes.rb,<br /> lib/squib/args/card_range.rb,<br /> lib/squib/args/save_batch.rb,<br /> lib/squib/args/arg_loader.rb,<br /> lib/squib/args/svg_special.rb,<br /> lib/squib/args/typographer.rb,<br /> lib/squib/args/hand_special.rb,<br /> lib/squib/args/embed_adjust.rb,<br /> lib/squib/graphics/save_doc.rb,<br /> lib/squib/graphics/showcase.rb,<br /> lib/squib/args/dir_validator.rb,<br /> lib/squib/graphics/background.rb,<br /> lib/squib/args/color_validator.rb,<br /> lib/squib/args/unit_conversion.rb,<br /> lib/squib/graphics/save_images.rb,<br /> lib/squib/args/showcase_special.rb,<br /> lib/squib/graphics/gradient_regex.rb,<br /> lib/squib/graphics/cairo_context_wrapper.rb</span>
 </dd>
   
 </dl>
@@ -104,7 +104,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Squib/Deck.html" title="Squib::Deck (class)">Deck</a></span>, <span class='object_link'><a href="Squib/TextEmbed.html" title="Squib::TextEmbed (class)">TextEmbed</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Squib/TextEmbed.html" title="Squib::TextEmbed (class)">TextEmbed</a></span>
     
   
 </p>
@@ -130,12 +130,13 @@ e.g. v0.0.5a is on its way to becoming v0.0.5</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.8.0</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.9.0b</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
-        <dt id="SYSTEM_DEFAULTS-constant" class="">SYSTEM_DEFAULTS =
+        <dt id="DEFAULT_FONT-constant" class="">DEFAULT_FONT =
           <div class="docstring">
   <div class="discussion">
-    <p>Squib&#39;s defaults for when arguments are not specified in the command nor layouts.</p>
+    <p>System-wide default font
+:nodoc:</p>
 
 
   </div>
@@ -145,126 +146,7 @@ e.g. v0.0.5a is on its way to becoming v0.0.5</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='lbrace'>{</span>
-  <span class='symbol'>:align</span> <span class='op'>=&gt;</span> <span class='symbol'>:left</span><span class='comma'>,</span>
-  <span class='symbol'>:alpha</span> <span class='op'>=&gt;</span> <span class='float'>1.0</span><span class='comma'>,</span>
-  <span class='symbol'>:angle</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:angle_range</span> <span class='op'>=&gt;</span> <span class='lparen'>(</span><span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span> <span class='op'>/</span> <span class='op'>-</span><span class='float'>4.0</span><span class='rparen'>)</span><span class='op'>..</span><span class='lparen'>(</span><span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span> <span class='op'>/</span> <span class='int'>4</span><span class='rparen'>)</span><span class='comma'>,</span>
-  <span class='symbol'>:blend</span> <span class='op'>=&gt;</span> <span class='symbol'>:none</span><span class='comma'>,</span>
-  <span class='symbol'>:color</span> <span class='op'>=&gt;</span> <span class='symbol'>:black</span><span class='comma'>,</span>
-  <span class='symbol'>:columns</span> <span class='op'>=&gt;</span> <span class='int'>5</span><span class='comma'>,</span>
-  <span class='symbol'>:count_format</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%02d</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:cx1</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:cx2</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:cy1</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:cy2</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:data</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
-  <span class='symbol'>:default_font</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Arial 36</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:dir</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_output</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:dx</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span> <span class='comment'># delta
-</span>  <span class='symbol'>:dy</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span> <span class='comment'># delta
-</span>  <span class='symbol'>:ellipsize</span> <span class='op'>=&gt;</span> <span class='symbol'>:end</span><span class='comma'>,</span>
-  <span class='symbol'>:face</span> <span class='op'>=&gt;</span> <span class='symbol'>:left</span><span class='comma'>,</span>
-  <span class='symbol'>:fill_color</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#0000</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:force_id</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='symbol'>:font</span> <span class='op'>=&gt;</span> <span class='symbol'>:use_set</span><span class='comma'>,</span>
-  <span class='symbol'>:font_size</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
-  <span class='symbol'>:format</span> <span class='op'>=&gt;</span> <span class='symbol'>:png</span><span class='comma'>,</span>
-  <span class='symbol'>:gap</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:height</span> <span class='op'>=&gt;</span> <span class='symbol'>:native</span><span class='comma'>,</span>
-  <span class='symbol'>:hint</span> <span class='op'>=&gt;</span> <span class='symbol'>:off</span><span class='comma'>,</span>
-  <span class='symbol'>:inner_radius</span> <span class='op'>=&gt;</span> <span class='int'>50</span><span class='comma'>,</span>
-  <span class='symbol'>:img_dir</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:justify</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='symbol'>:key</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>*</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:margin</span> <span class='op'>=&gt;</span> <span class='int'>75</span><span class='comma'>,</span>
-  <span class='symbol'>:markup</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='symbol'>:mask</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span>
-  <span class='symbol'>:n</span> <span class='op'>=&gt;</span> <span class='int'>5</span><span class='comma'>,</span>
-  <span class='symbol'>:offset</span> <span class='op'>=&gt;</span> <span class='float'>1.1</span><span class='comma'>,</span>
-  <span class='symbol'>:outer_radius</span> <span class='op'>=&gt;</span> <span class='int'>100</span><span class='comma'>,</span>
-  <span class='symbol'>:prefix</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>card_</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:progress_bar</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='symbol'>:quotes</span> <span class='op'>=&gt;</span> <span class='symbol'>:dumb</span><span class='comma'>,</span>
-  <span class='symbol'>:reflect_offset</span> <span class='op'>=&gt;</span> <span class='int'>15</span><span class='comma'>,</span>
-  <span class='symbol'>:reflect_percent</span> <span class='op'>=&gt;</span> <span class='float'>0.25</span><span class='comma'>,</span>
-  <span class='symbol'>:reflect_strength</span> <span class='op'>=&gt;</span> <span class='float'>0.2</span><span class='comma'>,</span>
-  <span class='symbol'>:range</span> <span class='op'>=&gt;</span> <span class='symbol'>:all</span><span class='comma'>,</span>
-  <span class='symbol'>:rotate</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='symbol'>:rows</span> <span class='op'>=&gt;</span> <span class='symbol'>:infinite</span><span class='comma'>,</span>
-  <span class='symbol'>:scale</span> <span class='op'>=&gt;</span> <span class='float'>0.85</span><span class='comma'>,</span>
-  <span class='symbol'>:sheet</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:spacing</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:str</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='symbol'>:stroke_color</span> <span class='op'>=&gt;</span> <span class='symbol'>:black</span><span class='comma'>,</span>
-  <span class='symbol'>:stroke_width</span> <span class='op'>=&gt;</span> <span class='float'>2.0</span><span class='comma'>,</span>
-  <span class='symbol'>:trim</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:trim_radius</span> <span class='op'>=&gt;</span> <span class='int'>38</span><span class='comma'>,</span>
-  <span class='symbol'>:valign</span> <span class='op'>=&gt;</span> <span class='symbol'>:top</span><span class='comma'>,</span>
-  <span class='symbol'>:width</span> <span class='op'>=&gt;</span> <span class='symbol'>:native</span><span class='comma'>,</span>
-  <span class='symbol'>:wrap</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span>
-  <span class='symbol'>:x</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:x1</span> <span class='op'>=&gt;</span> <span class='int'>100</span><span class='comma'>,</span>
-  <span class='symbol'>:x2</span> <span class='op'>=&gt;</span> <span class='int'>150</span><span class='comma'>,</span>
-  <span class='symbol'>:x3</span> <span class='op'>=&gt;</span> <span class='int'>100</span><span class='comma'>,</span>
-  <span class='symbol'>:x_radius</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:y</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-  <span class='symbol'>:y1</span> <span class='op'>=&gt;</span> <span class='int'>100</span><span class='comma'>,</span>
-  <span class='symbol'>:y2</span> <span class='op'>=&gt;</span> <span class='int'>150</span><span class='comma'>,</span>
-  <span class='symbol'>:y3</span> <span class='op'>=&gt;</span> <span class='int'>150</span><span class='comma'>,</span>
-  <span class='symbol'>:y_radius</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span>
-<span class='rbrace'>}</span></pre></dd>
-      
-        <dt id="UNIT_CONVERSION_PARAMS-constant" class="">UNIT_CONVERSION_PARAMS =
-          <div class="docstring">
-  <div class="discussion">
-    <p>These parameters are considered for unit conversion</p>
-
-<p>For example
-   text str: &#39;Hello, World&#39;, x: &#39;1in&#39;</p>
-
-<p>key: the internal name of the param (e.g. :circle_radius)
-value: the user-facing API key (e.g. radius: &#39;1in&#39;)</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='lbrace'>{</span>
-  <span class='symbol'>:circle_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:radius</span><span class='comma'>,</span>
-  <span class='symbol'>:cx1</span> <span class='op'>=&gt;</span> <span class='symbol'>:cx1</span><span class='comma'>,</span>
-  <span class='symbol'>:cx2</span> <span class='op'>=&gt;</span> <span class='symbol'>:cx2</span><span class='comma'>,</span>
-  <span class='symbol'>:cy1</span> <span class='op'>=&gt;</span> <span class='symbol'>:cy1</span><span class='comma'>,</span>
-  <span class='symbol'>:cy2</span> <span class='op'>=&gt;</span> <span class='symbol'>:cy2</span><span class='comma'>,</span>
-  <span class='symbol'>:dx</span> <span class='op'>=&gt;</span> <span class='symbol'>:dx</span><span class='comma'>,</span> <span class='comment'># delta
-</span>  <span class='symbol'>:dy</span> <span class='op'>=&gt;</span> <span class='symbol'>:dx</span><span class='comma'>,</span> <span class='comment'># delta
-</span>  <span class='symbol'>:gap</span> <span class='op'>=&gt;</span> <span class='symbol'>:gap</span><span class='comma'>,</span>
-  <span class='symbol'>:height</span> <span class='op'>=&gt;</span> <span class='symbol'>:height</span><span class='comma'>,</span>
-  <span class='symbol'>:inner_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:inner_radius</span><span class='comma'>,</span>
-  <span class='symbol'>:margin</span> <span class='op'>=&gt;</span> <span class='symbol'>:margin</span><span class='comma'>,</span>
-  <span class='symbol'>:outer_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:outer_radius</span><span class='comma'>,</span>
-  <span class='symbol'>:paper_width</span> <span class='op'>=&gt;</span> <span class='symbol'>:width</span><span class='comma'>,</span>
-  <span class='symbol'>:paper_height</span> <span class='op'>=&gt;</span> <span class='symbol'>:height</span><span class='comma'>,</span>
-  <span class='symbol'>:rect_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:radius</span><span class='comma'>,</span>
-  <span class='symbol'>:spacing</span> <span class='op'>=&gt;</span> <span class='symbol'>:spacing</span><span class='comma'>,</span>
-  <span class='symbol'>:stroke_width</span> <span class='op'>=&gt;</span> <span class='symbol'>:stroke_width</span><span class='comma'>,</span>
-  <span class='symbol'>:trim</span> <span class='op'>=&gt;</span> <span class='symbol'>:trim</span><span class='comma'>,</span>
-  <span class='symbol'>:width</span> <span class='op'>=&gt;</span> <span class='symbol'>:width</span><span class='comma'>,</span>
-  <span class='symbol'>:x</span> <span class='op'>=&gt;</span> <span class='symbol'>:x</span><span class='comma'>,</span>
-  <span class='symbol'>:x1</span> <span class='op'>=&gt;</span> <span class='symbol'>:x1</span><span class='comma'>,</span>
-  <span class='symbol'>:x2</span> <span class='op'>=&gt;</span> <span class='symbol'>:x2</span><span class='comma'>,</span>
-  <span class='symbol'>:x3</span> <span class='op'>=&gt;</span> <span class='symbol'>:x3</span><span class='comma'>,</span>
-  <span class='symbol'>:x_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:x_radius</span><span class='comma'>,</span>
-  <span class='symbol'>:y</span> <span class='op'>=&gt;</span> <span class='symbol'>:y</span><span class='comma'>,</span>
-  <span class='symbol'>:y1</span> <span class='op'>=&gt;</span> <span class='symbol'>:y1</span><span class='comma'>,</span>
-  <span class='symbol'>:y2</span> <span class='op'>=&gt;</span> <span class='symbol'>:y2</span><span class='comma'>,</span>
-  <span class='symbol'>:y3</span> <span class='op'>=&gt;</span> <span class='symbol'>:y3</span><span class='comma'>,</span>
-  <span class='symbol'>:y_radius</span> <span class='op'>=&gt;</span> <span class='symbol'>:y_radius</span><span class='comma'>,</span>
-<span class='rbrace'>}</span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Arial 36</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
     </dl>
   
@@ -905,9 +787,9 @@ data = xlsx file: &#39;data.xlsx&#39;, sheet: 0
 </div>
 
     <div id="footer">
-  Generated on Mon Oct 26 14:51:51 2015 by
+  Generated on Sun Jan 10 20:47:05 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.0.0).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
       <script>

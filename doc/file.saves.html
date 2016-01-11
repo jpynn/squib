@@ -67,9 +67,17 @@
 </span>
 <span class='const'>Squib</span><span class='op'>::</span><span class='const'>Deck</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>width:</span> <span class='int'>825</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>1125</span><span class='comma'>,</span> <span class='label'>cards:</span> <span class='int'>16</span><span class='rparen'>)</span> <span class='kw'>do</span>
   <span class='id identifier rubyid_background'>background</span> <span class='label'>color:</span> <span class='symbol'>:gray</span>
-  <span class='id identifier rubyid_rect'>rect</span> <span class='label'>x:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>y:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>750</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>1050</span><span class='comma'>,</span> <span class='label'>x_radius:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>y_radius:</span> <span class='int'>38</span>
+  <span class='id identifier rubyid_rect'>rect</span> <span class='label'>x:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>y:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>750</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>1050</span><span class='comma'>,</span>
+       <span class='label'>x_radius:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>y_radius:</span> <span class='int'>38</span><span class='comma'>,</span> <span class='label'>stroke:</span> <span class='float'>3.0</span><span class='comma'>,</span> <span class='label'>dash:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>4 4</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='id identifier rubyid_text'>text</span> <span class='label'>str:</span> <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>16</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='comma'>,</span> <span class='label'>x:</span> <span class='int'>220</span><span class='comma'>,</span> <span class='label'>y:</span> <span class='int'>78</span><span class='comma'>,</span> <span class='label'>font:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Arial 54</span><span class='tstring_end'>&#39;</span></span>
+
+  <span class='comment'># Here&#39;s what a regular save_png looks like for just the first card
+</span>  <span class='id identifier rubyid_save_png'>save_png</span> <span class='label'>range:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>save_png_</span><span class='tstring_end'>&#39;</span></span>
+
+  <span class='comment'># save_png supports trim and trim_radius
+</span>  <span class='id identifier rubyid_save_png'>save_png</span> <span class='label'>trim:</span> <span class='int'>30</span><span class='comma'>,</span> <span class='label'>trim_radius:</span> <span class='int'>38</span><span class='comma'>,</span>
+           <span class='label'>range:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>save_png_trimmed_</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='comment'># Place on multiple pages over the PDF, with bleed beeing trimmed off
 </span>  <span class='id identifier rubyid_save_pdf'>save_pdf</span> <span class='label'>file:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>save-pdf.pdf</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>margin:</span> <span class='int'>75</span><span class='comma'>,</span> <span class='label'>gap:</span> <span class='int'>5</span><span class='comma'>,</span> <span class='label'>trim:</span> <span class='int'>37</span>
@@ -100,9 +108,9 @@
 <span class='kw'>end</span></pre></div></div>
 
     <div id="footer">
-  Generated on Mon Oct 26 14:51:50 2015 by
+  Generated on Sun Jan 10 20:47:05 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.0.0).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
       <script>

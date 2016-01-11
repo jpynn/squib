@@ -1,6 +1,6 @@
 require 'squib'
 
-Squib::Deck.new(width: 825, height: 1125, cards: 1) do
+Squib::Deck.new(width: 825, height: 1125, cards: 1, config: 'load_images_config.yml') do
   background color: '#0b7c8e'
   rect x: 38, y: 38, width: 750, height: 1050, x_radius: 38, y_radius: 38
 
@@ -10,13 +10,34 @@ Squib::Deck.new(width: 825, height: 1125, cards: 1) do
   # Can be scaled if width and height are set
   svg file: 'spanner.svg', x: 50, y: 50, width: 250, height: 250
   png file: 'shiny-purse.png', x: 305, y: 50, width: 250, height: 250
-  #...but PNGs will warn if it's an upscale
+  #...but PNGs will warn if it's an upscale, unless you disable them in config.yml
 
   # Can be scaled using just width or height, if one of them is set to :scale
   svg file: 'spanner.svg', x: 200, y: 350, width: 35,     height: :scale
   svg file: 'spanner.svg', x: 200, y: 390, width: :scale, height: 35
   png file: 'shiny-purse.png', x: 240, y: 350, width: 35,     height: :scale
   png file: 'shiny-purse.png', x: 240, y: 390, width: :scale, height: 35
+
+  # You can also crop the loaded images, so you can work from a sprite sheet
+  png file: 'sprites.png', x: 300, y: 350  # entire sprite sheet
+  png file: 'sprites.png', x: 300, y: 425, # just the robot golem image
+      crop_x: 0, crop_y: 0, crop_corner_radius: 10,
+      crop_width: 64, crop_height: 64
+  png file: 'sprites.png', x: 400, y: 425, # just the drakkar ship image
+      crop_x: 64, crop_y: 0, crop_corner_x_radius: 25, crop_corner_y_radius: 25,
+      crop_width: 64, crop_height: 64
+  png file: 'sprites.png', x: 500, y: 415, # just the drakkar ship image, rotated
+      crop_x: 64, crop_y: 0, crop_corner_x_radius: 25, crop_corner_y_radius: 25,
+      crop_width: 64, crop_height: 64, angle: Math::PI / 6
+
+  # Cropping also works on SVGs too
+  svg file: 'spanner.svg', x: 300, y: 500, width: 64, height: 64,
+      crop_x: 32, crop_y: 32, crop_width: 32, crop_height:32
+
+  # We can flip our images too
+  png file: 'sprites.png', x: 300, y: 535, flip_vertical: true, flip_horizontal: true
+  svg file: 'spanner.svg', x: 300, y: 615, width: 64, height: 64,
+      flip_vertical: true, flip_horizontal: true
 
   # We can also limit our rendering to a single object, if the SVG ID is set
   svg file: 'spanner.svg', id: '#backdrop', x: 50, y: 350, width: 75, height: 75
