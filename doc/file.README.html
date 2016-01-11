@@ -61,7 +61,7 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><div id='filecontents'><h1>Squib <a href="https://rubygems.org/gems/squib"><img src="https://badge.fury.io/rb/squib.svg" alt="Gem Version"></a> <a href="https://travis-ci.org/andymeneely/squib"><img src="https://secure.travis-ci.org/andymeneely/squib.svg?branch=master" alt="Build Status"></a> <a href="https://gemnasium.com/andymeneely/squib"><img src="https://gemnasium.com/andymeneely/squib.svg" alt="Dependency Status"></a> <a href="https://coveralls.io/r/andymeneely/squib"><img src="https://img.shields.io/coveralls/andymeneely/squib.svg" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/andymeneely/squib"><img src="http://inch-ci.org/github/andymeneely/squib.png?branch=master" alt="Inline docs"></a></h1>
+    <div id="content"><div id='filecontents'><h1>Squib <a href="https://rubygems.org/gems/squib"><img src="https://badge.fury.io/rb/squib.svg" alt="Gem Version"></a> <a href="https://travis-ci.org/andymeneely/squib"><img src="https://secure.travis-ci.org/andymeneely/squib.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/andymeneely/squib"><img src="https://ci.appveyor.com/api/projects/status/github/andymeneely/squib?svg=true" alt="Vey"></a> <a href="https://gemnasium.com/andymeneely/squib"><img src="https://gemnasium.com/andymeneely/squib.svg" alt="Dependency Status"></a> <a href="https://coveralls.io/r/andymeneely/squib"><img src="https://img.shields.io/coveralls/andymeneely/squib.svg" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/andymeneely/squib"><img src="http://inch-ci.org/github/andymeneely/squib.png?branch=master" alt="Inline docs"></a></h1>
 
 <p>Squib is a Ruby <a href="http://en.wikipedia.org/wiki/Domain-specific_language">DSL</a> for prototyping card and board games. Write a little bit of Ruby, define your deck&#39;s stats, then compile your game into a series of images ready for print-and-play or even print-on-demand. Squib is very data-driven and built on the principle of Don&#39;t Repeat Yourself. Think of it like <a href="http://www.nand.it/nandeck/">nanDeck</a> done &quot;the Ruby way&quot;. Squib supports:</p>
 
@@ -130,8 +130,8 @@ $ ruby deck.rb
 
 <p>The <code>squib new</code> command will generate files and folders like this:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid__output'>_output</span><span class='op'>/</span><span class='id identifier rubyid_gitkeep'>gitkeep</span><span class='period'>.</span><span class='id identifier rubyid_txt'>txt</span><span class='period'>
-</span><span class='id identifier rubyid_.gitignore'>.gitignore</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid__output'>_output</span><span class='op'>/</span><span class='id identifier rubyid_gitkeep'>gitkeep</span><span class='period'>.</span><span class='id identifier rubyid_txt'>txt</span>
+<span class='period'>.</span><span class='id identifier rubyid_gitignore'>gitignore</span>
 <span class='const'>ABOUT</span><span class='period'>.</span><span class='id identifier rubyid_md'>md</span>
 <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_yml'>yml</span>
 <span class='id identifier rubyid_deck'>deck</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
@@ -994,6 +994,8 @@ child_b:
 <li><code>antialias</code> (<code>fast, good, best, none, gray, subpixel</code>, default: best). Set the algorithm that Cairo will use for antialiasing. Using our benchmarks on large decks, <code>best</code> is only ~10% slower anyway. For more info see the <a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-antialias-t">Cairo docs</a>.</li>
 <li><code>backend</code> (<code>svg</code> or <code>memory</code>, default: <code>memory</code>). Defines how Cairo will store the operations. Memory is recommended for higher quality rendering.</li>
 <li><code>prefix</code> (default: <code>card_</code>). When using an SVG backend, cards are auto-saved with this prefix and <code>&quot;%02d&quot;</code> numbering format.</li>
+<li><code>warn_ellipsize</code> (default: true). Warn when text is ellipsized</li>
+<li><code>warn_png_scale</code> (default: true). Warn when a PNG file is upscaled</li>
 </ul>
 
 <p>For debugging/sanity purposes, if you want to make sure your configuration options are parsed correclty, the above options are also available as methods within Squib::Deck, for example:</p>
@@ -1287,9 +1289,9 @@ child_b:
 </div></div>
 
     <div id="footer">
-  Generated on Mon Oct 26 14:51:50 2015 by
+  Generated on Sun Jan 10 20:47:04 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.0.0).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
       <script>

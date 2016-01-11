@@ -155,6 +155,28 @@ a Cairo transformation matrix that</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#polygon-instance_method" title="#polygon (instance method)">- (Object) <strong>polygon</strong>(x, y, n, angle, radius, fill_color, stroke_color, stroke_width) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#set_font_rendering_opts%21-instance_method" title="#set_font_rendering_opts! (instance method)">- (Object) <strong>set_font_rendering_opts!</strong>(layout) </a>
     
 
@@ -206,7 +228,78 @@ a Cairo transformation matrix that</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="set_font_rendering_opts!-instance_method">
+  <h3 class="signature first" id="polygon-instance_method">
+  
+    - (<tt>Object</tt>) <strong>polygon</strong>(x, y, n, angle, radius, fill_color, stroke_color, stroke_width) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/squib/graphics/shapes.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_polygon'>polygon</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='comma'>,</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='id identifier rubyid_angle'>angle</span><span class='comma'>,</span> <span class='id identifier rubyid_radius'>radius</span><span class='comma'>,</span> <span class='id identifier rubyid_fill_color'>fill_color</span><span class='comma'>,</span> <span class='id identifier rubyid_stroke_color'>stroke_color</span><span class='comma'>,</span> <span class='id identifier rubyid_stroke_width'>stroke_width</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_use_cairo'>use_cairo</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cc'>cc</span><span class='op'>|</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_rotate'>rotate</span><span class='lparen'>(</span><span class='id identifier rubyid_angle'>angle</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span><span class='lparen'>(</span><span class='op'>-</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='op'>-</span><span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_move_to'>move_to</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='id identifier rubyid_radius'>radius</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span> <span class='comment'># i = 0, so cos(0)=1 and sin(0)=0
+</span>    <span class='id identifier rubyid_theta'>theta</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='int'>2</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='id identifier rubyid_n'>n</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
+    <span class='int'>0</span><span class='period'>.</span><span class='id identifier rubyid_upto'>upto</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+        <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_line_to'>line_to</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='id identifier rubyid_radius'>radius</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='id identifier rubyid_cos'>cos</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>*</span> <span class='id identifier rubyid_theta'>theta</span><span class='rparen'>)</span><span class='comma'>,</span>
+                   <span class='id identifier rubyid_y'>y</span> <span class='op'>+</span> <span class='id identifier rubyid_radius'>radius</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='id identifier rubyid_sin'>sin</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>*</span> <span class='id identifier rubyid_theta'>theta</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_close_path'>close_path</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_set_source_squibcolor'>set_source_squibcolor</span><span class='lparen'>(</span><span class='id identifier rubyid_stroke_color'>stroke_color</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_set_line_width'>set_line_width</span><span class='lparen'>(</span><span class='id identifier rubyid_stroke_width'>stroke_width</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_fill_preserve'>fill_preserve</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_set_source_squibcolor'>set_source_squibcolor</span><span class='lparen'>(</span><span class='id identifier rubyid_fill_color'>fill_color</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cc'>cc</span><span class='period'>.</span><span class='id identifier rubyid_stroke'>stroke</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_font_rendering_opts!-instance_method">
   
     - (<tt>Object</tt>) <strong>set_font_rendering_opts!</strong>(layout) 
   
@@ -306,7 +399,7 @@ a Cairo transformation matrix that</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Apr 30 10:31:47 2015 by
+  Generated on Tue May 26 20:50:17 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
