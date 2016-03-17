@@ -1,3 +1,0 @@
-# If we want to disable smart quoting and only allow explicit quoting within markup, 
-# use this option
-smart_quotes: false
