@@ -28,12 +28,4 @@ include: [ _output ]
 
 # Build settings
 markdown: kramdown
-###################
-# ON GITHUB PAGES #
-###################
-# highlighter: pygments
-
-##############
-# ON WINDOWS #
-##############
 highlighter: rouge

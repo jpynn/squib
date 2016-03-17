@@ -156,7 +156,6 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
-  rouge
   squib
 
 BUNDLED WITH
