@@ -27,10 +27,7 @@ exclude:
 include: [ _output ]
 
 # Build settings
-markdown: redcarpet
-redcarpet:
-  extensions:
-    - tables
+markdown: kramdown
 ###################
 # ON GITHUB PAGES #
 ###################
