@@ -20,7 +20,7 @@ Squib is based on the [Cairo](http://cairographics.org/) graphics rendering engi
 
 <div class="highlight highlight-ruby">
 {% highlight ruby %}
-  {% include_relative squib_examples/basic.rb %}
+{% include_relative squib_examples/basic.rb %}
 {% endhighlight %}
 </div>
 
@@ -37,7 +37,7 @@ Squib is based on the [Cairo](http://cairographics.org/) graphics rendering engi
 
 <div class="highlight highlight-ruby">
 {% highlight ruby %}
-  {% include_relative squib_examples/better.rb %}
+{% include_relative squib_examples/better.rb %}
 {% endhighlight %}
 </div>
 
@@ -64,14 +64,14 @@ Suppose we have an excel sheet like this:
 And a `layout.yml` file like this:
 <div class="highlight highlight-ruby">
 {% highlight yaml %}
-  {% include_relative squib_examples/layout.yml %}
+{% include_relative squib_examples/layout.yml %}
 {% endhighlight %}
 </div>
 
 And then this `deck.rb` file:
 <div class="highlight highlight-ruby">
 {% highlight ruby %}
-  {% include_relative squib_examples/bigger.rb %}
+{% include_relative squib_examples/bigger.rb %}
 {% endhighlight %}
 </div>
 
@@ -99,14 +99,14 @@ Ok that was cool, but let's go bigger. This example uses our built-in layout cal
 And a `layout.yml` file like this:
 <div class="highlight highlight-ruby">
 {% highlight yaml %}
-  {% include_relative squib_examples/even-bigger.yml %}
+{% include_relative squib_examples/even-bigger.yml %}
 {% endhighlight %}
 </div>
 
 And then this `deck.rb` file:
 <div class="highlight highlight-ruby">
 {% highlight ruby %}
-  {% include_relative squib_examples/even-bigger.rb %}
+{% include_relative squib_examples/even-bigger.rb %}
 {% endhighlight %}
 </div>
 

@@ -34,9 +34,9 @@ redcarpet:
 ###################
 # ON GITHUB PAGES #
 ###################
-highlighter: pygments
+# highlighter: pygments
 
 ##############
 # ON WINDOWS #
 ##############
-# highlighter: rouge
+highlighter: rouge
