@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'squib'
-gem 'rouge'
 gem 'github-pages'
 ##############
 # ON WINDOWS #
