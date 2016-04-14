@@ -50,7 +50,7 @@ Squib is based on the [Cairo](http://cairographics.org/) graphics rendering engi
 
 <hr/>
 
-##Let's go bigger.
+## Let's go bigger.
 
 Suppose we have an excel sheet like this:
 
