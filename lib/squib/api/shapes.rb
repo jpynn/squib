@@ -10,8 +10,8 @@ module Squib
     # DSL method. See http://squib.readthedocs.org
     def rect(opts = {})
       range = Args::CardRange.new(opts[:range], deck_size: size)
-      box   = Args::Box.new(self).load!(opts, expand_by: size, layout: layout, dpi: dpi)
-      draw  = Args::Draw.new(custom_colors).load!(opts, expand_by: size, layout: layout, dpi: dpi)
+      box   = Args::Box.new(self).load!(opts, expand_by: size, layout: layout, dpi: dpi, deck_defaults: @defaults)
+      draw  = Args::Draw.new(custom_colors).load!(opts, expand_by: size, layout: layout, dpi: dpi, deck_defaults: @defaults)
       range.each { |i| @cards[i].rect(box[i], draw[i]) }
     end
 
