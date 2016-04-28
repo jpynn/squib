@@ -27,8 +27,8 @@ Squib is based on the [Cairo](http://cairographics.org/) graphics rendering engi
 <div class="downarrow"></div>
 
 <div class="example">
-  <img src="/squib/squib_examples/_output/basic_0.png">
-  <img src="/squib/squib_examples/_output/basic_1.png">
+  <img src="squib_examples/_output/basic_0.png">
+  <img src="squib_examples/_output/basic_1.png">
 </div>
 
 <hr/>
@@ -44,8 +44,8 @@ Squib is based on the [Cairo](http://cairographics.org/) graphics rendering engi
 <div class="downarrow"></div>
 
 <div class="example">
-  <img src="/squib/squib_examples/_output/better_0.png">
-  <img src="/squib/squib_examples/_output/better_1.png">
+  <img src="squib_examples/_output/better_0.png">
+  <img src="squib_examples/_output/better_1.png">
 </div>
 
 <hr/>
@@ -78,10 +78,10 @@ And then this `deck.rb` file:
 <div class="downarrow"></div>
 
 <div class="example">
-  <img src="/squib/squib_examples/_output/bigger_0.png">
-  <img src="/squib/squib_examples/_output/bigger_1.png">
-  <img src="/squib/squib_examples/_output/bigger_2.png">
-  <img src="/squib/squib_examples/_output/bigger_3.png">
+  <img src="squib_examples/_output/bigger_0.png">
+  <img src="squib_examples/_output/bigger_1.png">
+  <img src="squib_examples/_output/bigger_2.png">
+  <img src="squib_examples/_output/bigger_3.png">
 </div>
 
 <hr/>
@@ -114,17 +114,17 @@ And then this `deck.rb` file:
 <div class="downarrow"></div>
 
 <div class="example">
-  <img src="/squib/squib_examples/_output/even_bigger_0.png">
-  <img src="/squib/squib_examples/_output/even_bigger_1.png">
-  <img src="/squib/squib_examples/_output/even_bigger_2.png">
-  <img src="/squib/squib_examples/_output/even_bigger_3.png">
+  <img src="squib_examples/_output/even_bigger_0.png">
+  <img src="squib_examples/_output/even_bigger_1.png">
+  <img src="squib_examples/_output/even_bigger_2.png">
+  <img src="squib_examples/_output/even_bigger_3.png">
 </div>
 
 <div>
-  <img src="/squib/squib_examples/_output/showcase.png">
+  <img src="squib_examples/_output/showcase.png">
 </div>
 <div>
-  <img src="/squib/squib_examples/_output/hand.png">
+  <img src="squib_examples/_output/hand.png">
 </div>
 
 <hr/>
