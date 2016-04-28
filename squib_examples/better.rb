@@ -1,12 +1,10 @@
 require 'squib'
 
-light = '#F3EFE3'
-dark = '#230602'
-Squib::Deck.new(cards: 2, width: 825, height: 1125) do
-  background color: dark
+Squib::Deck.new(cards: 2) do
+  background color: '#230602'
 
   text str: %w( Attack Defend ),
-       color: light, font: 'ChunkFive Roman,Sans 72',
+       color: '#F3EFE3', font: 'ChunkFive Roman,Sans 72',
        y: '2.5in', width: '2.75in', align: :center
 
   svg file: %w(attack.svg defend.svg),

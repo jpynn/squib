@@ -129,8 +129,8 @@ And then this `deck.rb` file:
 
 <hr/>
 
-Ready to [get started](http://squib.readthedocs.org)?
+Ready to [get started](http://squib.readthedocs.io)?
 
 The above examples can be found [here](https://github.com/andymeneely/squib/tree/gh-pages/squib_examples).
 
-NOTE: The final example, in particular, is intended to showcase the expressive power of Ruby+Squib. If you are new to Ruby (or to programming entirely), I don't recommend starting by dissecting the above example. Instead, head over to the [docs](http://squib.readthedocs.org), and playing with our exhaustive [samples](https://github.com/andymeneely/squib/tree/master/samples), and keep referring back to the [method-by-method documentation](http://squib.readthedocs.org/en/latest/dsl/index.html) for details.
+NOTE: The final example, in particular, is intended to showcase the expressive power of Ruby+Squib. If you are new to Ruby (or to programming entirely), I don't recommend starting by dissecting the above example. Instead, head over to the [docs](http://squib.readthedocs.io), and playing with our exhaustive [samples](https://github.com/andymeneely/squib/tree/master/samples), and keep referring back to the [method-by-method documentation](http://squib.readthedocs.io/en/latest/dsl/index.html) for details.
