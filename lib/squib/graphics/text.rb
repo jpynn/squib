@@ -72,7 +72,7 @@ module Squib
           w = embed.rules[key][:box].width[@index] * Pango::SCALE
           puts "Width is gonna be #{embed.rules[key][:box].width[@index]}, or #{w} in Pango"
           carve = Pango::Rectangle.new(0, 0, w, 0)
-          att = Pango::AttrShape.new(carve, carve.dup, embed.rules[key])
+          att = Pango::AttrShape.new(carve, carve, embed.rules[key])
           att.start_index = range.first
           att.end_index = range.last
           attrs.insert(att)
@@ -80,14 +80,14 @@ module Squib
         end
       end
       layout.attributes = attrs
-      layout.context.set_shape_renderer do |cxt, att, do_path|
+      layout.context.set_shape_renderer do |cxt, att, m_do_path|
         rule = att.data
-        x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
+        x = (layout.index_to_pos(att.start_index).x / Pango::SCALE) +
               rule[:adjust].dx[@index]
-        y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
+        y = (layout.index_to_pos(att.start_index).y / Pango::SCALE) +
               rule[:adjust].dy[@index]
 
-        puts "Gonna draw!! #{x},#{y}"
+        puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}"
         rule[:draw].call(self, x, y)
       end
     end

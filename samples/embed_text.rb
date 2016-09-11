@@ -6,7 +6,7 @@ Squib::Deck.new do
 
   embed_text = 'Take 11 :tool: and gain 2 :health:. Take <b>2</b> :tool: <i>and gain 3 :purse: if level 2.</i>'
   text(str: embed_text, font: 'Sans 21',
-       x: 0, y: 0, width: 180, hint: :red,
+       x: 0, y: 0, width: 1180, hint: :red,
        align: :left, ellipsize: false, justify: false) do |embed|
     # Notice how we use dx and dy to adjust the icon to not rest directly on the baseline
     embed.svg key: ':tool:',   width: 28, height: 28, dx:  0, dy: 4, file: 'spanner.svg'
