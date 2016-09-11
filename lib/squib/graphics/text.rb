@@ -22,10 +22,10 @@ module Squib
 
     # :nodoc:
     # @api private
-    def compute_valign(layout, valign, embed_h)
+    def compute_valign(layout, valign)
       return 0 unless layout.height > 0
       ink_extents = layout.extents[1]
-      ink_extents.height = embed_h * Pango::SCALE if ink_extents.height == 0 # JUST embed, bug #134
+      # ink_extents.height = embed_h * Pango::SCALE if ink_extents.height == 0 # JUST embed, bug #134
       case valign.to_s.downcase
       when 'middle'
         Pango.pixels((layout.height - ink_extents.height) / 2)
@@ -51,56 +51,63 @@ module Squib
       layout.height = height * Pango::SCALE unless height.nil? || height == :auto
     end
 
-    def max_embed_height(embed_draws)
-      embed_draws.inject(0) do |max, ed|
-        ed[:h] > max ? ed[:h] : max
-      end
-    end
+    # def max_embed_height(embed_draws)
+    #   embed_draws.inject(0) do |max, ed|
+    #     ed[:h] > max ? ed[:h] : max
+    #   end
+    # end
 
-    # :nodoc:
-    # @api private
-    def next_embed(keys, str)
-      ret     = nil
-      ret_key = nil
-      keys.each do |key|
-        i = str.index(key)
-        ret ||= i
-        unless i.nil? || i > ret
-          ret = i
-          ret_key = key
-        end
-      end
-      ret_key
-    end
-
-    # :nodoc:
-    # @api private
     def process_embeds(embed, str, layout)
       return [] unless embed.rules.any?
       layout.markup = str
       clean_str     = layout.text
       draw_calls    = []
-      searches      = []
-      while (key = next_embed(embed.rules.keys, clean_str)) != nil
-        rule    = embed.rules[key]
-        spacing = rule[:box].width[@index] * Pango::SCALE
-        kindex   = clean_str.index(key)
-        kindex   = clean_str[0..kindex].bytesize # byte index (bug #57)
-        str = str.sub(key, "\u2062<span letter_spacing=\"#{spacing.to_i}\">\u2062</span>\u2062")
-        layout.markup = str
-        clean_str     = layout.text
-        searches << { index: kindex, rule: rule }
-      end
-      searches.each do |search|
-        rect = layout.index_to_pos(search[:index])
-        x    = Pango.pixels(rect.x) + search[:rule][:adjust].dx[@index]
-        y    = Pango.pixels(rect.y) + search[:rule][:adjust].dy[@index]
-        h    = rule[:box].height[@index]
-        draw_calls << { x: x, y: y, h: h, # defer drawing until we've valigned
-                       draw: search[:rule][:draw] }
-      end
       return draw_calls
     end
+
+    # # :nodoc:
+    # # @api private
+    # def next_embed(keys, str)
+    #   ret     = nil
+    #   ret_key = nil
+    #   keys.each do |key|
+    #     i = str.index(key)
+    #     ret ||= i
+    #     unless i.nil? || i > ret
+    #       ret = i
+    #       ret_key = key
+    #     end
+    #   end
+    #   ret_key
+    # end
+    #
+    # # :nodoc:
+    # def process_embeds(embed, str, layout)
+    #   return [] unless embed.rules.any?
+    #   layout.markup = str
+    #   clean_str     = layout.text
+    #   draw_calls    = []
+    #   searches      = []
+    #   while (key = next_embed(embed.rules.keys, clean_str)) != nil
+    #     rule    = embed.rules[key]
+    #     spacing = rule[:box].width[@index] * Pango::SCALE
+    #     kindex   = clean_str.index(key)
+    #     kindex   = clean_str[0..kindex].bytesize # byte index (bug #57)
+    #     str = str.sub(key, "\u2062<span letter_spacing=\"#{spacing.to_i}\">\u2062</span>\u2062")
+    #     layout.markup = str
+    #     clean_str     = layout.text
+    #     searches << { index: kindex, rule: rule }
+    #   end
+    #   searches.each do |search|
+    #     rect = layout.index_to_pos(search[:index])
+    #     x    = Pango.pixels(rect.x) + search[:rule][:adjust].dx[@index]
+    #     y    = Pango.pixels(rect.y) + search[:rule][:adjust].dy[@index]
+    #     h    = rule[:box].height[@index]
+    #     draw_calls << { x: x, y: y, h: h, # defer drawing until we've valigned
+    #                    draw: search[:rule][:draw] }
+    #   end
+    #   return draw_calls
+    # end
 
     def stroke_outline!(cc, layout, draw)
       if draw.stroke_width > 0
@@ -146,24 +153,24 @@ module Squib
         layout.justify = para.justify unless para.justify.nil?
         layout.spacing = para.spacing unless para.spacing.nil?
 
-        embed_draws    = process_embeds(embed, para.str, layout)
+        process_embeds(embed, para.str, layout)
 
-        vertical_start = compute_valign(layout, para.valign, max_embed_height(embed_draws))
+        vertical_start = compute_valign(layout, para.valign)
         cc.move_to(0, vertical_start) # TODO clean this up a bit
 
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :stroke_first
         cc.move_to(0, vertical_start)
         cc.show_pango_layout(layout)
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :fill_first
-        begin
-          embed_draws.each { |ed| ed[:draw].call(self, ed[:x], ed[:y] + vertical_start) }
-        rescue Exception => e
-          puts '====EXCEPTION!===='
-          puts e
-          puts 'If this was a non-invertible matrix error, this is a known issue with a potential workaround. Please report it at: https://github.com/andymeneely/squib/issues/55'
-          puts '=================='
-          raise e
-        end
+        # begin
+        #   embed_draws.each { |ed| ed[:draw].call(self, ed[:x], ed[:y] + vertical_start) }
+        # rescue Exception => e
+        #   puts '====EXCEPTION!===='
+        #   puts e
+        #   puts 'If this was a non-invertible matrix error, this is a known issue with a potential workaround. Please report it at: https://github.com/andymeneely/squib/issues/55'
+        #   puts '=================='
+        #   raise e
+        # end
         draw_text_hint(cc, box.x, box.y, layout, para.hint)
         extents = { width: layout.extents[1].width / Pango::SCALE,
                     height: layout.extents[1].height / Pango::SCALE }
