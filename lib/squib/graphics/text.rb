@@ -68,11 +68,12 @@ module Squib
       puts "  Indices: #{EmbeddingUtils.indices(clean_str, embed.rules.keys)}"
       EmbeddingUtils.indices(clean_str, embed.rules.keys).each do |key, ranges|
         puts "Ranges: #{ranges}"
+        rule = embed.rules[key]
         ranges.each do |range|
-          w = embed.rules[key][:box].width[@index] * Pango::SCALE
+          w = rule[:box].width[@index] * Pango::SCALE / (range.size - 1)
           puts "Width is gonna be #{embed.rules[key][:box].width[@index]}, or #{w} in Pango"
           carve = Pango::Rectangle.new(0, 0, w, 0)
-          att = Pango::AttrShape.new(carve, carve, embed.rules[key])
+          att = Pango::AttrShape.new(carve, carve, rule)
           att.start_index = range.first
           att.end_index = range.last
           attrs.insert(att)
@@ -82,9 +83,9 @@ module Squib
       layout.attributes = attrs
       layout.context.set_shape_renderer do |cxt, att, m_do_path|
         rule = att.data
-        x = (layout.index_to_pos(att.start_index).x / Pango::SCALE) +
-              rule[:adjust].dx[@index]
-        y = (layout.index_to_pos(att.start_index).y / Pango::SCALE) +
+        x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
+            rule[:adjust].dx[@index]
+        y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
               rule[:adjust].dy[@index]
 
         puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}"
@@ -187,7 +188,9 @@ module Squib
 
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :stroke_first
         cc.move_to(0, vertical_start)
+
         cc.show_pango_layout(layout)
+        cc.move_to(0, vertical_start)
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :fill_first
         # begin
         #   embed_draws.each { |ed| ed[:draw].call(self, ed[:x], ed[:y] + vertical_start) }
