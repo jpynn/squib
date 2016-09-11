@@ -1,5 +1,6 @@
 require 'pango'
 require_relative '../args/typographer'
+require_relative 'embedding_utils'
 
 module Squib
   class Card
@@ -57,12 +58,38 @@ module Squib
     #   end
     # end
 
-    def process_embeds(embed, str, layout)
+    def embed_images!(embed, str, layout)
       return [] unless embed.rules.any?
       layout.markup = str
       clean_str     = layout.text
-      draw_calls    = []
-      return draw_calls
+      attrs = layout.attributes || Pango::AttrList.new
+      puts "Embedding! #{str}"
+      puts "  Rules: #{embed.rules.keys}"
+      puts "  Indices: #{EmbeddingUtils.indices(clean_str, embed.rules.keys)}"
+      EmbeddingUtils.indices(clean_str, embed.rules.keys).each do |key, ranges|
+        puts "Ranges: #{ranges}"
+        ranges.each do |range|
+          w = embed.rules[key][:box].width[@index] * Pango::SCALE
+          puts "Width is gonna be #{embed.rules[key][:box].width[@index]}, or #{w} in Pango"
+          carve = Pango::Rectangle.new(0, 0, w, 0)
+          att = Pango::AttrShape.new(carve, carve.dup, embed.rules[key])
+          att.start_index = range.first
+          att.end_index = range.last
+          attrs.insert(att)
+          puts "Inserting attribute!"
+        end
+      end
+      layout.attributes = attrs
+      layout.context.set_shape_renderer do |cxt, att, do_path|
+        rule = att.data
+        x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
+              rule[:adjust].dx[@index]
+        y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
+              rule[:adjust].dy[@index]
+
+        puts "Gonna draw!! #{x},#{y}"
+        rule[:draw].call(self, x, y)
+      end
     end
 
     # # :nodoc:
@@ -153,7 +180,7 @@ module Squib
         layout.justify = para.justify unless para.justify.nil?
         layout.spacing = para.spacing unless para.spacing.nil?
 
-        process_embeds(embed, para.str, layout)
+        embed_images!(embed, para.str, layout)
 
         vertical_start = compute_valign(layout, para.valign)
         cc.move_to(0, vertical_start) # TODO clean this up a bit
