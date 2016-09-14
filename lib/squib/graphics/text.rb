@@ -52,94 +52,39 @@ module Squib
       layout.height = height * Pango::SCALE unless height.nil? || height == :auto
     end
 
-    def max_embed_height(embed_draws)
-      embed_draws.inject(0) do |max, ed|
-        ed[:h] > max ? ed[:h] : max
-      end
-    end
-
+    # # :nodoc:
+    # # @api private
     def embed_images!(embed, str, layout, valign)
       return [] unless embed.rules.any?
       layout.markup = str
       clean_str     = layout.text
       attrs = layout.attributes || Pango::AttrList.new
-      puts "Embedding! #{str}"
-      puts "  Rules: #{embed.rules.keys}"
-      puts "  Indices: #{EmbeddingUtils.indices(clean_str, embed.rules.keys)}"
       EmbeddingUtils.indices(clean_str, embed.rules.keys).each do |key, ranges|
-        puts "Ranges: #{ranges}"
         rule = embed.rules[key]
         ranges.each do |range|
           w = rule[:box].width[@index] * Pango::SCALE / (range.size - 1)
-          puts "Width is gonna be #{embed.rules[key][:box].width[@index]}, or #{w} in Pango"
           carve = Pango::Rectangle.new(0, 0, w, 0)
           att = Pango::AttrShape.new(carve, carve, rule)
           att.start_index = range.first
           att.end_index = range.last
           attrs.insert(att)
-          puts "Inserting attribute!"
         end
       end
       layout.attributes = attrs
       layout.context.set_shape_renderer do |cxt, att, do_path|
-        unless do_path
+        unless do_path # when stroking the text
           rule = att.data
           x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
               rule[:adjust].dx[@index]
           y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
                 rule[:adjust].dy[@index] +
                 compute_valign(layout, valign, rule[:box].height[@index])
-          puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}. do_path: #{do_path}, "
           rule[:draw].call(self, x, y)
           cxt.reset_clip
           [cxt, att, do_path]
         end
       end
     end
-
-    # # :nodoc:
-    # # @api private
-    # def next_embed(keys, str)
-    #   ret     = nil
-    #   ret_key = nil
-    #   keys.each do |key|
-    #     i = str.index(key)
-    #     ret ||= i
-    #     unless i.nil? || i > ret
-    #       ret = i
-    #       ret_key = key
-    #     end
-    #   end
-    #   ret_key
-    # end
-    #
-    # # :nodoc:
-    # def process_embeds(embed, str, layout)
-    #   return [] unless embed.rules.any?
-    #   layout.markup = str
-    #   clean_str     = layout.text
-    #   draw_calls    = []
-    #   searches      = []
-    #   while (key = next_embed(embed.rules.keys, clean_str)) != nil
-    #     rule    = embed.rules[key]
-    #     spacing = rule[:box].width[@index] * Pango::SCALE
-    #     kindex   = clean_str.index(key)
-    #     kindex   = clean_str[0..kindex].bytesize # byte index (bug #57)
-    #     str = str.sub(key, "\u2062<span letter_spacing=\"#{spacing.to_i}\">\u2062</span>\u2062")
-    #     layout.markup = str
-    #     clean_str     = layout.text
-    #     searches << { index: kindex, rule: rule }
-    #   end
-    #   searches.each do |search|
-    #     rect = layout.index_to_pos(search[:index])
-    #     x    = Pango.pixels(rect.x) + search[:rule][:adjust].dx[@index]
-    #     y    = Pango.pixels(rect.y) + search[:rule][:adjust].dy[@index]
-    #     h    = rule[:box].height[@index]
-    #     draw_calls << { x: x, y: y, h: h, # defer drawing until we've valigned
-    #                    draw: search[:rule][:draw] }
-    #   end
-    #   return draw_calls
-    # end
 
     def stroke_outline!(cc, layout, draw)
       if draw.stroke_width > 0
