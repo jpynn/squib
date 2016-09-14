@@ -15,7 +15,8 @@ module Squib
           if idx.nil?
             break; # done searching
           else
-            map[key] << (idx..(idx + key.bytesize))
+            idx_bytes = str[0..idx].bytesize - 1
+            map[key] << (idx_bytes..(idx_bytes + key.size))
             start = idx + 1
           end
         end

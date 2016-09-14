@@ -94,6 +94,14 @@ Squib::Deck.new do
     embed.png key: ':purse:', file: 'shiny-purse.png', width: 32, height: 32
   end
 
+  embed_text = 'You can adjust the icon with dx and dy. Normal: :tool: Adjusted: :heart:'
+  text(str: embed_text, font: 'Sans 18', x: 400, y: 640, width: 180,
+       height: 300, hint: :magenta) do |embed|
+    embed.svg key: ':tool:', width: 28, height: 28, file: 'spanner.svg'
+    embed.svg key: ':heart:', width: 28, height: 28, dx: 10, dy: 10,
+              file: 'glass-heart.svg'
+  end
+
   save_png prefix: 'embed_'
 end
 

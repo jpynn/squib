@@ -23,10 +23,10 @@ module Squib
 
     # :nodoc:
     # @api private
-    def compute_valign(layout, valign)
+    def compute_valign(layout, valign, embed_h)
       return 0 unless layout.height > 0
       ink_extents = layout.extents[1]
-      # ink_extents.height = embed_h * Pango::SCALE if ink_extents.height == 0 # JUST embed, bug #134
+      ink_extents.height = embed_h * Pango::SCALE if ink_extents.height == 0 # JUST embed, bug #134
       case valign.to_s.downcase
       when 'middle'
         Pango.pixels((layout.height - ink_extents.height) / 2)
@@ -52,13 +52,13 @@ module Squib
       layout.height = height * Pango::SCALE unless height.nil? || height == :auto
     end
 
-    # def max_embed_height(embed_draws)
-    #   embed_draws.inject(0) do |max, ed|
-    #     ed[:h] > max ? ed[:h] : max
-    #   end
-    # end
+    def max_embed_height(embed_draws)
+      embed_draws.inject(0) do |max, ed|
+        ed[:h] > max ? ed[:h] : max
+      end
+    end
 
-    def embed_images!(embed, str, layout)
+    def embed_images!(embed, str, layout, valign)
       return [] unless embed.rules.any?
       layout.markup = str
       clean_str     = layout.text
@@ -86,9 +86,10 @@ module Squib
         x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
             rule[:adjust].dx[@index]
         y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
-              rule[:adjust].dy[@index]
+              rule[:adjust].dy[@index] +
+              compute_valign(layout, valign, rule[:box].height[@index])
 
-        puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}"
+        puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}, layout w: #{layout.width / Pango::SCALE}, h: #{layout.height / Pango::SCALE}"
         rule[:draw].call(self, x, y)
       end
     end
@@ -181,9 +182,9 @@ module Squib
         layout.justify = para.justify unless para.justify.nil?
         layout.spacing = para.spacing unless para.spacing.nil?
 
-        embed_images!(embed, para.str, layout)
+        embed_images!(embed, para.str, layout, para.valign)
 
-        vertical_start = compute_valign(layout, para.valign)
+        vertical_start = compute_valign(layout, para.valign, 0)
         cc.move_to(0, vertical_start) # TODO clean this up a bit
 
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :stroke_first
@@ -192,15 +193,6 @@ module Squib
         cc.show_pango_layout(layout)
         cc.move_to(0, vertical_start)
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :fill_first
-        # begin
-        #   embed_draws.each { |ed| ed[:draw].call(self, ed[:x], ed[:y] + vertical_start) }
-        # rescue Exception => e
-        #   puts '====EXCEPTION!===='
-        #   puts e
-        #   puts 'If this was a non-invertible matrix error, this is a known issue with a potential workaround. Please report it at: https://github.com/andymeneely/squib/issues/55'
-        #   puts '=================='
-        #   raise e
-        # end
         draw_text_hint(cc, box.x, box.y, layout, para.hint)
         extents = { width: layout.extents[1].width / Pango::SCALE,
                     height: layout.extents[1].height / Pango::SCALE }

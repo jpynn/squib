@@ -62,9 +62,9 @@ describe Squib::EmbeddingUtils do
       str = '💡 📷 :tool: heart text'
       keys = %w(:tool: heart 💡)
       expect(Squib::EmbeddingUtils.indices(str, keys)).to eq({
-        ':tool:' => [4..10],
-        'heart' => [11..16],
-        '💡' => [0..4]
+        ':tool:' => [10..16],
+        'heart' => [17..22],
+        '💡' => [3..4]
       })
     end
 
