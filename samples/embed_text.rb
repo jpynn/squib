@@ -101,14 +101,14 @@ Squib::Deck.new do
               file: 'glass-heart.svg'
   end
 
-  # embed_text = 'Native sizes work too:tool::heart:'
-  # text(str: embed_text, font: 'Sans 18', x: 600, y: 640, width: 180,
-  #      height: 300, hint: :magenta) do |embed|
-  #   embed.svg key: ':tool:', width: :native, height: :native,
-  #             file: 'spanner.svg'
-  #   embed.svg key: ':heart:', width: :native, height: :native,
-  #             file: 'glass-heart.svg'
-  # end
+  embed_text = 'Native sizes work too:tool::heart:'
+  text(str: embed_text, font: 'Sans 18', x: 600, y: 640, width: 180,
+       height: 300, hint: :magenta) do |embed|
+    embed.svg key: ':tool:', width: :native, height: :native,
+              file: 'spanner.svg'
+    embed.svg key: ':heart:', width: :native, height: :native,
+              file: 'glass-heart.svg'
+  end
 
   save_png prefix: 'embed_'
 end
