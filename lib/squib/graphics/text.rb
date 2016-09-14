@@ -81,16 +81,19 @@ module Squib
         end
       end
       layout.attributes = attrs
-      layout.context.set_shape_renderer do |cxt, att, m_do_path|
-        rule = att.data
-        x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
-            rule[:adjust].dx[@index]
-        y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
-              rule[:adjust].dy[@index] +
-              compute_valign(layout, valign, rule[:box].height[@index])
-
-        puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}, layout w: #{layout.width / Pango::SCALE}, h: #{layout.height / Pango::SCALE}"
-        rule[:draw].call(self, x, y)
+      layout.context.set_shape_renderer do |cxt, att, do_path|
+        unless do_path
+          rule = att.data
+          x = Pango.pixels(layout.index_to_pos(att.start_index).x) +
+              rule[:adjust].dx[@index]
+          y = Pango.pixels(layout.index_to_pos(att.start_index).y) +
+                rule[:adjust].dy[@index] +
+                compute_valign(layout, valign, rule[:box].height[@index])
+          puts "Gonna draw!! #{x},#{y}, and width was #{att.ink_rect.width / Pango::SCALE}. do_path: #{do_path}, "
+          rule[:draw].call(self, x, y)
+          cxt.reset_clip
+          [cxt, att, do_path]
+        end
       end
     end
 
@@ -185,7 +188,7 @@ module Squib
         embed_images!(embed, para.str, layout, para.valign)
 
         vertical_start = compute_valign(layout, para.valign, 0)
-        cc.move_to(0, vertical_start) # TODO clean this up a bit
+        cc.move_to(0, vertical_start)
 
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :stroke_first
         cc.move_to(0, vertical_start)
