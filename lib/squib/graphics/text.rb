@@ -160,7 +160,6 @@ module Squib
         cc.move_to(0, vertical_start)
 
         cc.show_pango_layout(layout)
-        cc.move_to(0, vertical_start)
         stroke_outline!(cc, layout, draw) if draw.stroke_strategy == :fill_first
         draw_text_hint(cc, box.x, box.y, layout, para.hint)
         extents = { width: layout.extents[1].width / Pango::SCALE,
