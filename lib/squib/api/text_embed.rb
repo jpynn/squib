@@ -5,7 +5,6 @@ require_relative '../args/embed_key'
 require_relative '../args/input_file'
 require_relative '../args/paint'
 require_relative '../args/transform'
-require_relative '../args/embed_size_handler'
 
 module Squib
   class TextEmbed
@@ -34,8 +33,8 @@ module Squib
       trans = Args::Transform.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
       ifile = Args::InputFile.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
       svg_args = Args::SvgSpecial.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
-      Args::EmbedSizeHandler.svg_native_size!(@deck_size, box, ifile, svg_args)
-      rule = { type: :png, file: ifile, box: box, paint: paint, trans: trans, adjust: adjust }
+      rule = { type: :svg, file: ifile, box: box, paint: paint, trans: trans,
+               adjust: adjust, svg_args: svg_args }
       rule[:draw] = Proc.new do |card, x, y|
         i = card.index
         b = box[i]
@@ -56,7 +55,6 @@ module Squib
       adjust = Args::EmbedAdjust.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
       trans = Args::Transform.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
       ifile = Args::InputFile.new.load!(opts, expand_by: @deck_size, layout: @layout, dpi: @dpi)
-      Args::EmbedSizeHandler.png_native_size!(@deck_size, box, ifile)
       rule  = { type: :png, file: ifile, box: box, paint: paint, trans: trans, adjust: adjust }
       rule[:draw] = Proc.new do |card, x, y|
         i = card.index

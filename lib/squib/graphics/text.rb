@@ -52,6 +52,28 @@ module Squib
       layout.height = height * Pango::SCALE unless height.nil? || height == :auto
     end
 
+    # Compute the width of the carve that we need
+    def compute_carve(rule, range)
+      w = rule[:box].width[@index]
+      if w == :native
+        file = rule[:file][@index].file
+        case rule[:type]
+        when :png
+          Squib.cache_load_image(file).width.to_f / (range.size - 1)
+        when :svg
+          svg_data = rule[:svg_args].data[@index]
+          unless file.to_s.empty? || svg_data.to_s.empty?
+            Squib.logger.warn 'Both an SVG file and SVG data were specified'
+          end
+          return 0 if (file.nil? or file.eql? '') and svg_data.nil?
+          svg_data = File.read(file) if svg_data.to_s.empty?
+          RSVG::Handle.new_from_data(svg_data).width
+        end
+      else
+        rule[:box].width[@index] * Pango::SCALE / (range.size - 1)
+      end
+    end
+
     # # :nodoc:
     # # @api private
     def embed_images!(embed, str, layout, valign)
@@ -62,8 +84,7 @@ module Squib
       EmbeddingUtils.indices(clean_str, embed.rules.keys).each do |key, ranges|
         rule = embed.rules[key]
         ranges.each do |range|
-          w = rule[:box].width[@index] * Pango::SCALE / (range.size - 1)
-          carve = Pango::Rectangle.new(0, 0, w, 0)
+          carve = Pango::Rectangle.new(0, 0, compute_carve(rule, range), 0)
           att = Pango::AttrShape.new(carve, carve, rule)
           att.start_index = range.first
           att.end_index = range.last
