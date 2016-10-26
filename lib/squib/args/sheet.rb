@@ -12,14 +12,23 @@ module Squib
       include ColorValidator
       include DirValidator
 
-      def initialize(custom_colors = {}, dsl_method_defaults = {}, deck_size = 1)
+      def initialize(custom_colors = {}, dsl_method_defaults = {}, deck_size = 1, dpi = 300)
         @custom_colors = custom_colors
         @dsl_method_defaults = dsl_method_defaults
         @deck_size = deck_size
+        @dpi = dpi
       end
 
       def self.parameters
         {
+          crop_margin_bottom: 0,
+          crop_margin_left: 0,
+          crop_margin_right: 0,
+          crop_margin_top: 0,
+          crop_marks: true,
+          crop_stroke_color: :black,
+          crop_stroke_dash: '',
+          crop_stroke_width: 1.5,
           dir: '_output',
           file: 'sheet.png',
           fill_color: :white,
@@ -40,6 +49,12 @@ module Squib
 
       def self.params_with_units
         [ :gap, :height, :margin, :trim_radius, :trim, :width ]
+      end
+
+      def validate_crop_stroke_dash(arg)
+        arg.to_s.split.collect do |x|
+          UnitConversion.parse(x, @dpi).to_f
+        end
       end
 
       def validate_fill_color(arg)
