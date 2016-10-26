@@ -32,6 +32,26 @@ module Squib
           bar.increment
           cc.reset_clip
           cc.translate(-x, -y)
+          ##### CROP METHOD
+          # New options:
+          #   crop_marks: false
+          #   crop_stroke_width: 1.0
+          #   crop_stroke_color: black
+          #   crop_stroke_dash: ''
+          #   crop_top_margin: 0
+          #   crop_bottom_margin: 0
+          #   crop_left_margin: 0
+          #   crop_right_margin 0
+          cc.move_to(x + sheet.trim, 0)
+          cc.line_to(x + sheet.trim, sheet.margin - 1)
+          cc.set_source_color(:black)
+          cc.set_dash([2, 2])
+          cc.set_line_width(1.0) # allow dash pattern as well
+          cc.stroke
+          # NOTE: Can we customize the top-bottom-left-right margins of crop? We assume edge of the card, but maybe we want to print full bleed and crop ourselves?
+          # TODO: Do this again, but four more times for each card
+
+          #####
           x += card.width + sheet.gap - 2 * sheet.trim
           if x > (sheet.width - card_width - sheet.margin)
             x = sheet.margin
