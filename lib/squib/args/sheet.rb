@@ -48,7 +48,10 @@ module Squib
       end
 
       def self.params_with_units
-        [ :gap, :height, :margin, :trim_radius, :trim, :width ]
+        [ :crop_margin_bottom, :crop_margin_left, :crop_margin_right,
+          :crop_margin_top, :gap, :height, :margin, :trim_radius, :trim,
+          :width
+        ]
       end
 
       def validate_crop_stroke_dash(arg)

@@ -1,3 +1,5 @@
+require_relative '../args/sheet'
+
 module Squib
   module Graphics
     class SavePDF
@@ -69,29 +71,29 @@ module Squib
 
       def draw_crop_marks(cc, x, y, sheet)
         draw_line(cc, sheet,  # Vertical, Upper-left
-                  x + sheet.trim, 0,
-                  x + sheet.trim, sheet.margin - 1)
+                  x + sheet.trim + sheet.crop_margin_left, 0,
+                  x + sheet.trim + sheet.crop_margin_left, sheet.margin - 1)
         draw_line(cc, sheet,  # Vertical, Upper-right
-                  x + @deck.width - sheet.trim, 0,
-                  x + @deck.width - sheet.trim, sheet.margin - 1)
+                  x + @deck.width - sheet.trim - sheet.crop_margin_right, 0,
+                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.margin - 1)
         draw_line(cc, sheet,  # Vertical, Lower-left
-                  x + sheet.trim, sheet.height,
-                  x + sheet.trim, sheet.height - sheet.margin + 1)
+                  x + sheet.trim + sheet.crop_margin_left, sheet.height,
+                  x + sheet.trim + sheet.crop_margin_left, sheet.height - sheet.margin + 1)
         draw_line(cc, sheet,  # Vertical, Lower-right
-                  x + @deck.width - sheet.trim, sheet.height,
-                  x + @deck.width - sheet.trim, sheet.height - sheet.margin + 1)
+                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.height,
+                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.height - sheet.margin + 1)
         draw_line(cc, sheet,  # Horizontal, Upper-left
-                  0               , y + sheet.trim,
-                  sheet.margin - 1, y + sheet.trim)
+                  0               , y + sheet.trim + sheet.crop_margin_top,
+                  sheet.margin - 1, y + sheet.trim + sheet.crop_margin_top)
         draw_line(cc, sheet,  # Horizontal, Upper-Right
-                  sheet.width                   , y + sheet.trim,
-                  sheet.width - sheet.margin + 1, y + sheet.trim)
+                  sheet.width                   , y + sheet.trim + sheet.crop_margin_top,
+                  sheet.width - sheet.margin + 1, y + sheet.trim + sheet.crop_margin_top)
         draw_line(cc, sheet,  # Horizontal, Lower-Left
-                  0               , y + @deck.height - sheet.trim,
-                  sheet.margin - 1, y + @deck.height - sheet.trim)
-        draw_line(cc, sheet,  # Horizontal, Lower-Left
-                  sheet.width                   , y + @deck.height - sheet.trim,
-                  sheet.width - sheet.margin + 1, y + @deck.height - sheet.trim)
+                  0               , y + @deck.height - sheet.trim - sheet.crop_margin_bottom,
+                  sheet.margin - 1, y + @deck.height - sheet.trim - sheet.crop_margin_bottom)
+        draw_line(cc, sheet,  # Horizontal, Lower-Right
+                  sheet.width                   , y + @deck.height - sheet.trim - sheet.crop_margin_bottom,
+                  sheet.width - sheet.margin + 1, y + @deck.height - sheet.trim - sheet.crop_margin_bottom)
       end
 
       def draw_line(cc, sheet, x1, y1, x2, y2)
