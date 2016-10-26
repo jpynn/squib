@@ -70,40 +70,16 @@ module Squib
       end
 
       def draw_crop_marks(cc, x, y, sheet)
-        draw_line(cc, sheet,  # Vertical, Upper-left
-                  x + sheet.trim + sheet.crop_margin_left, 0,
-                  x + sheet.trim + sheet.crop_margin_left, sheet.margin - 1)
-        draw_line(cc, sheet,  # Vertical, Upper-right
-                  x + @deck.width - sheet.trim - sheet.crop_margin_right, 0,
-                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.margin - 1)
-        draw_line(cc, sheet,  # Vertical, Lower-left
-                  x + sheet.trim + sheet.crop_margin_left, sheet.height,
-                  x + sheet.trim + sheet.crop_margin_left, sheet.height - sheet.margin + 1)
-        draw_line(cc, sheet,  # Vertical, Lower-right
-                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.height,
-                  x + @deck.width - sheet.trim - sheet.crop_margin_right, sheet.height - sheet.margin + 1)
-        draw_line(cc, sheet,  # Horizontal, Upper-left
-                  0               , y + sheet.trim + sheet.crop_margin_top,
-                  sheet.margin - 1, y + sheet.trim + sheet.crop_margin_top)
-        draw_line(cc, sheet,  # Horizontal, Upper-Right
-                  sheet.width                   , y + sheet.trim + sheet.crop_margin_top,
-                  sheet.width - sheet.margin + 1, y + sheet.trim + sheet.crop_margin_top)
-        draw_line(cc, sheet,  # Horizontal, Lower-Left
-                  0               , y + @deck.height - sheet.trim - sheet.crop_margin_bottom,
-                  sheet.margin - 1, y + @deck.height - sheet.trim - sheet.crop_margin_bottom)
-        draw_line(cc, sheet,  # Horizontal, Lower-Right
-                  sheet.width                   , y + @deck.height - sheet.trim - sheet.crop_margin_bottom,
-                  sheet.width - sheet.margin + 1, y + @deck.height - sheet.trim - sheet.crop_margin_bottom)
+        sheet.crop_coords(x, y, @deck.width, @deck.height).each do |coord|
+          cc.move_to(coord[:x1], coord[:y1])
+          cc.line_to(coord[:x2], coord[:y2])
+          cc.set_source_color(sheet.crop_stroke_color)
+          cc.set_dash(sheet.crop_stroke_dash)
+          cc.set_line_width(sheet.crop_stroke_width)
+          cc.stroke
+        end
       end
 
-      def draw_line(cc, sheet, x1, y1, x2, y2)
-        cc.move_to(x1, y1)
-        cc.line_to(x2, y2)
-        cc.set_source_color(sheet.crop_stroke_color)
-        cc.set_dash(sheet.crop_stroke_dash)
-        cc.set_line_width(sheet.crop_stroke_width)
-        cc.stroke
-      end
     end
   end
 end
