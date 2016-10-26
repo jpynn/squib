@@ -25,7 +25,7 @@ module Squib
           crop_margin_left: 0,
           crop_margin_right: 0,
           crop_margin_top: 0,
-          crop_marks: true,
+          crop_marks: false,
           crop_stroke_color: :black,
           crop_stroke_dash: '',
           crop_stroke_width: 1.5,
