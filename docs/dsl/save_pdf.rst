@@ -1,12 +1,10 @@
 save_pdf
 ========
 
-Lays out the cards in range on a sheet and renders a PDF
+Lays out the cards in a gride and renders a PDF.
 
 Options
 -------
-
-
 
 file
   default: ``'output.pdf'``
@@ -77,7 +75,6 @@ crop_stroke_dash
   default: ``''``
 
   Define a dash pattern for the crop marks. This is a special string with space-separated numbers that define the pattern of on-and-off alternating strokes, measured in pixels or units. For example, ``'0.02in 0.02in'`` will be an equal on-and-off dash pattern. Supports :doc:`/units`. Has no effect if ``crop_marks`` is ``false``.
-
 
 crop_stroke_width
   default: ``1.5``
