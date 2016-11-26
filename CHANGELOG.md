@@ -3,8 +3,24 @@ Squib follows [semantic versioning](http://semver.org).
 
 ## v0.12.0 / Unreleased
 
+Features:
+* `save_pdf` now supports crop marks! These are lines drawn in the margins of a PDF file to help you cut. These can be enabled by setting `crop_marks: true` in your `save_pdf` call. Can be further customized with `crop_margin_bottom`, `crop_margin_left`, `crop_margin_right`, `crop_margin_top`, `crop_marks`, `crop_stroke_color`, `crop_stroke_dash`, and `crop_stroke_width` (#123)
+* `Squib.configure` allows you to set options programmatically, overriding your config.yml. This is useful for Rakefiles, and will be documented in my upcoming tutorial on workflows.
+* `Squib.enable_build_globally` and `Squib.disable_build_globally` are new convenience methods for working with the `SQUIB_BUILD` environment variable. Handy for Rakefiles and Guard sessions for turning certain builds on an off. Also will be in upcoming workflow tutorial.
+
+Bugs:
+* `showcase` works as expected when using `backend: svg` (#179)
+* Graphics will get flushed upon exit, so working under Guard with `backend: svg` is more reliable (#180)
+
+Docs:
+* Wrote out documentation for [Squib and GameIcons](http://squib.readthedocs.io/en/latest/guides/game_icons.html)
+* Wrote out documentation for Hello World! Dissected
+* Un-submoduled our samples and simply embedded them into the docs (e.g. [Squib Thinks in Arrays](http://squib.readthedocs.io/en/latest/arrays.html)). Lots of cleanup there
+* Wrote up [Squib in Action](http://squib.readthedocs.io/en/latest/guides/projects.html), which documents other Squib projects. Ask for yours to be put there!!
+
 Chores:
-* Bumped dependency roo to 2.5.1.
+* Bumped dependency roo to 2.5.1. Nothing that affects Squib users (probably).
+* Bumped graphics and text dependencies (cairo to 1.15.3, pango+rsvg et al. to 3.1.0). No new features for us, but some stability improvements.
 
 ## v0.11.0 / 2016-09-05
 

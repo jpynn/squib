@@ -44,15 +44,16 @@ describe 'Squib samples' do
       embed_text.rb
       hello_world.rb
       images/_more_load_images.rb
-      ranges.rb
+      ranges/_ranges.rb
       saves/_hand.rb
       saves/_portrait_landscape.rb
       saves/_saves.rb
+      saves/_save_pdf.rb
       saves/_showcase.rb
       shapes/_draw_shapes.rb
       text_options.rb
       tgc_proofs.rb
-      units.rb
+      units/_units.rb
   ).each do |sample|
     it "has not changed for #{sample}", slow: true do
       log = StringIO.new

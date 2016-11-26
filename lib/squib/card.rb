@@ -51,6 +51,14 @@ module Squib
       @cairo_context.restore
     end
 
+    def finish!
+      begin
+        @cairo_surface.finish
+      rescue Cairo::SurfaceFinishedError
+        # do nothin - if it's already finished that's fine
+      end
+    end
+
     ########################
     ### BACKEND GRAPHICS ###
     ########################
