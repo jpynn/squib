@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'json'
 require 'forwardable'
 
@@ -63,6 +65,21 @@ module Squib
       @hash
     end
 
+    def to_pretty_text
+      max_col = columns.inject(0) { |max, c | c.length > max ? c.length : max }
+      top =    " ╭#{'-' * 35}╮\n"
+      bottom = " ╰#{'-' * 35}╯\n"
+      str =  ''
+      0.upto(nrows - 1) do | i |
+        str += (' ' * max_col) + top
+        row(i).each do |col, data|
+          str += "#{col.rjust(max_col)} #{wrap_n_pad(data, max_col)}"
+        end
+        str += (' ' * max_col) + bottom
+      end
+      return str
+    end
+
     private
 
     def snake_case(str)
@@ -72,6 +89,16 @@ module Squib
           gsub(/([a-z]+)([A-Z])/,'\1_\2').
           downcase.
           to_sym
+    end
+
+    def wrap_n_pad(str, max_col)
+      str.to_s.
+          concat(' '). # handle nil & empty strings
+          scan(/.{1,34}/).
+          map { |s| (' ' * max_col) + " | " + s.ljust(34) }.
+          join(" |\n").
+          lstrip.      # initially no whitespace next to key
+          concat(" |\n")
     end
 
   end

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 require 'squib/import/data_frame'
 
@@ -161,6 +163,81 @@ EOS
     it 'returns false if a column does not exist' do
       data = Squib::DataFrame.new basic
       expect(data.col? 'ROUS').to be false
+    end
+  end
+
+  context :wrap_n_pad do
+    subject { Squib::DataFrame.new basic }
+
+    it 'returns a handles a single line' do
+      expect(subject.send(:wrap_n_pad, 'a', 3)).
+        to eq "| a                                  |\n"
+    end
+
+    it 'wraps multiple a lines at 34 characters' do
+      expect(subject.send(:wrap_n_pad, 'a' * 40, 3)).
+        to eq <<-EOS
+| aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+    | aaaaaa                             |
+EOS
+    end
+  end
+
+  context :to_pretty_text do
+
+    let(:verbose) do
+      {
+        'Name' => ['Mage', 'Rogue', 'Warrior'],
+        'Cost' => [1, 2, 3],
+        'Description' => [
+          'Magic, dude.',
+          'I like to be sneaky',
+          'I have a long story to tell to test the word-wrapping ability of pretty text formatting.'
+          ],
+        'Snark' => [nil, '', ' ']
+      }
+    end
+
+    it 'returns fun ascii art of the card' do
+      data = Squib::DataFrame.new verbose
+      expect(data.to_pretty_text).to eq <<-EOS
+            ╭-----------------------------------╮
+       Name | Mage                               |
+       Cost | 1                                  |
+Description | Magic, dude.                       |
+      Snark |                                    |
+            ╰-----------------------------------╯
+            ╭-----------------------------------╮
+       Name | Rogue                              |
+       Cost | 2                                  |
+Description | I like to be sneaky                |
+      Snark |                                    |
+            ╰-----------------------------------╯
+            ╭-----------------------------------╮
+       Name | Warrior                            |
+       Cost | 3                                  |
+Description | I have a long story to tell to tes |
+            | t the word-wrapping ability of pre |
+            | tty text formatting.               |
+      Snark |                                    |
+            ╰-----------------------------------╯
+EOS
+    end
+
+    let(:utf8_fun) do
+      {
+      'Fun with UTF8!' => ['👊'],
+      }
+    end
+
+    it 'is admittedly janky with multibyte chars' do
+      # I hate how Ruby handles multibyte chars. Blech!
+      data = Squib::DataFrame.new utf8_fun
+      expect(data.to_pretty_text).to eq <<-EOS
+               ╭-----------------------------------╮
+Fun with UTF8! | 👊                                  |
+               ╰-----------------------------------╯
+EOS
     end
   end
 
