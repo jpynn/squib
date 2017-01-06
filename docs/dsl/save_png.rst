@@ -42,5 +42,15 @@ trim_radius
 
   the rounded rectangle radius around the card to trim before saving.
 
+width
+  default: ``:deck``
+
+  The width of the saved image. If set to ``:deck``, no scaling is done. Otherwise, the image will be scaled. Scaling is performed _after_ ``trim`` and ``trim_radius`` are processed.
+
+height
+  default: ``:deck``
+
+  The height of the saved image. If  set to ``:deck``, no scaling is done. Otherwise, the image will be scaled. Scaling is performed _after_ ``trim`` and ``trim_radius`` are processed.
+
 Examples
 --------
