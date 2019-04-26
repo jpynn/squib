@@ -39,3 +39,4 @@ samples/_output/*.svg
 spec/samples/sanity.html
 spec/samples/_diffs/*.png
 .byebug_history
+/.idea/*
